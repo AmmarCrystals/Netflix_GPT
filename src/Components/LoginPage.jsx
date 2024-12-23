@@ -1,14 +1,19 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 const LoginPage = () => {
 
-const [form, setForm] = useState(false)
+    const [form, setForm] = useState(false)
+    const email = useRef(null)
+    const password = useRef(null)
 
-const handleclick =() =>{
+    const validHandle = () => {
+        validateInput(email, password)
 
-    setForm(!form)
+    }
 
-}
+    const handleclick = () => {
+        setForm(!form)
+    }
     return (
         <>
             <div className=" w-full h-64 ">
@@ -19,11 +24,10 @@ const handleclick =() =>{
 
                 <div className="flex flex-col w-80 h-96 bg-black space-y-2 bg-opacity-80  pt-8 pb-8 gap-2" >
                     <p className=" text-3xl m-4 ml-8">{form ? "Sign Up" : "Sign In"}</p>
-                    {form && <input type="email" placeholder="Enter your Name" className="m-[2px] bg-opacity-20 ml-8 p-2 pl-2 text-white-500 bg-gray-700 w-64 rounded" />}
-                    
-                    <input type="email" placeholder="Enter your Email" className="m-[2px] bg-opacity-20 ml-8 p-2 pl-2 text-white-500 bg-gray-700 w-64 rounded" />
-                    <input type="password"  placeholder="Password" className="bg-opacity-20 pl-2 ml-8 p-2 text-white-500 bg-gray-700 w-64 rounded" />
-                    <button className="bg-red-700 w-64 mb-8  p-2 ml-8 rounded hover:bg-red-600">{form ? "Sign Up" : "Sign In"}</button>
+                    {form && <input type="text" placeholder="Enter your Name" className="m-[2px] bg-opacity-20 ml-8 p-2 pl-2 text-white-500 bg-gray-700 w-64 rounded" />}
+                    <input ref={email} type="email" placeholder="Enter your Email" className="m-[2px] bg-opacity-20 ml-8 p-2 pl-2 text-white-500 bg-gray-700 w-64 rounded" />
+                    <input ref={password} type="password" placeholder="Password" className="bg-opacity-20 pl-2 ml-8 p-2 text-white-500 bg-gray-700 w-64 rounded" />
+                    <button onClick={validHandle} className="bg-red-700 w-64 mb-8  p-2 ml-8 rounded hover:bg-red-600">{form ? "Sign Up" : "Sign In"}</button>
                     <p className=" text-xs mt-4 ml-8">New to Netflix? <button className="text-sm font-bold" onClick={handleclick} > Sign up now. </button></p>
 
                 </div>
