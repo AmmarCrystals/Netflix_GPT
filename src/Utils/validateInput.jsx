@@ -1,14 +1,17 @@
-const validateInput =(email, password)=>{
-    const email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
-    const password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/.test(password)
+export const validateInput = (email, password) => {
+    const isEmailValid  = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    const isPasswordValid  = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/.test(password)
 
 
-    if(!email){
-        "Entered Wrong Email"
+    if (!isEmailValid ) {
+    return      "Entered Wrong Email"
     }
-    if(!password){
-        "Entered Wrong Password"
+    if (!isPasswordValid ) {
+       return "Entered Wrong Password"
     }
 
-
+// return {isNameValid, isEmailValid, isPasswordValid}
+// return isNameValid
+return isEmailValid
+return isPasswordValid
 }
