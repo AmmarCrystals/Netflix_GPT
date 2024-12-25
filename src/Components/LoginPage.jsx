@@ -1,16 +1,49 @@
 import { useState, useRef } from "react"
 import {validateInput} from "../Utils/validateInput"
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
+import { auth } from "../Utils/Firebase";
+
 const LoginPage = () => {
     const [form, setForm] = useState(false)
     const [errorMessage, seteErorMessage] = useState(null)
     const email = useRef()
     const password = useRef()
     const name = useRef()
-
     const validHandle = () => {
+
+
+        
         const message = validateInput(email.current.value, password?.current?.value)
-        console.log(name.current.value)
         seteErorMessage(message)
+        if (!message) return
+        if(form){
+            console.log("ehfdgwyiu")
+            createUserWithEmailAndPassword(auth, email.current.value, password?.current?.value)
+            .then((userCredential) => {
+              // Signed up 
+              const user = userCredential.user;
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+seteErorMessage(errorCode + " " + errorMessage)
+            });
+                  }else{
+                    signInWithEmailAndPassword(auth, email.current.value, password?.current?.value)
+                    .then((userCredential) => {
+                      // Signed in 
+                      const user = userCredential.user;
+              console.log(user)
+
+                    })
+                    .catch((error) => {
+                      const errorCode = error.code;
+                      const errorMessage = error.message;
+seteErorMessage(errorCode + " " + errorMessage)
+
+                    });
+                          }
 
     }
 
